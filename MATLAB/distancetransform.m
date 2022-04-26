@@ -1,0 +1,12 @@
+imdata = bwdistgeodesic(logical(nb6), logical(sb6), 'quasi-euclidean');
+imdata = uint16(imdata);
+t = Tiff('E:\PhD\Data analysis\Temp\006_nb_dt_fused.tif','w');
+t.setTag('ImageLength',size(imdata,1));
+t.setTag('ImageWidth', size(imdata,2));
+t.setTag('Photometric', Tiff.Photometric.MinIsBlack);
+t.setTag('BitsPerSample', 16);
+t.setTag('SamplesPerPixel', size(imdata,3));
+t.setTag('PlanarConfiguration', Tiff.PlanarConfiguration.Chunky);
+t.setTag('Software', 'MATLAB');
+t.write(imdata);
+t.close();
