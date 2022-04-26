@@ -1,0 +1,35 @@
+Mitography scripts and example data
+-----------------------------------
+This is a suite of analysis scripts for the Mitography analysis, as used in the article Coceano et al. 2022 (in preparation). 
+
+
+
+example-data
+------------
+
+
+
+
+MATLAB
+------------
+
+
+
+
+ImageJ
+------------
+
+
+
+
+Python
+------------
+
+
+
+
+Contact
+------------
+GitHub: jonatanalvelid
+twitter: jonatanalvelid
+Email: jonatan.alvelid@scilifelab.se
