@@ -1,13 +1,11 @@
 %%%
-% Mitography - Turnover analysis
 % Distance transform a whole folder of neuritesbinary + somabinary
-%----------------------------
-% Version: 201112
-% Last updated features: First version
 %
 % @jonatanalvelid
 %%%
+
 clear
+
 % Add function folder to filepath, so that those functions can be read.
 functionFolder = fileparts(which('findFunctionFolders.m'));
 addpath(genpath(functionFolder));

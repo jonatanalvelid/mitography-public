@@ -2,8 +2,6 @@
 % Mitography - Turnover analysis
 % Analysis the turnover ratio of mito proteins versus to the distance
 % from the soma.
-%----------------------------
-% Version: 220426
 %
 % @jonatanalvelid
 %%%

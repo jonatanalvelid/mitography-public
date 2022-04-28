@@ -1,20 +1,26 @@
 %%%
-% Mitography - antiDNA analysis - data plotting
-% Plotting the data from the DNA analysis.
-%----------------------------
-% Version: 191217
-% Last updated features: New script
+% AntiDNA analysis - data plotting
+% Plotting the data from the DNA analysis - number of nucleoids vs area.
 %
 % @jonatanalvelid
 %%%
 
-% clear
+clear
 
-% Add function folder to filepath, so that those functions can be read.
-functionFolder = fileparts(which('findFunctionFolders.m'));
-addpath(genpath(functionFolder));
+% Add functions folder to filepath and get data folder path
+filename = matlab.desktop.editor.getActiveFilename;
+parentfolder = getfield(fliplr(regexp(fileparts(fileparts(filename)),'/','split')),{1});
+doubleparentfolder = getfield(fliplr(regexp(fileparts(fileparts(fileparts(fileparts(filename)))),'/','split')),{1});
+functionsfolder = fullfile(parentfolder{1},'functions');
+addpath(functionsfolder);
+datafolder = fullfile(doubleparentfolder{1},'example-data');
 
-masterFolderPath = strcat(uigetdir('T:\Mitography'),'\');
+%%%
+% Parameters
+% data folder
+masterFolderPath = fullfile(datafolder,'nucleoids','dna','matlab\');
+%%%
+
 fileList = dir(fullfile(masterFolderPath, 'Image_*.txt'));
 filenumbers = [];
 for i = 1:length(fileList)
@@ -44,7 +50,7 @@ for fileNum = fileNumbers
         % Get somadist and number of nucleotides for all mito in image
         map2bintemp = datamito(:,params);
         numnucltemp = datamito(:,params-1);
-        areatemp = datamito(:,3);
+        areatemp = datamito(:,1);
         
         % Add to list of all mitochondria in all images
         map2bin = vertcat(map2bin,map2bintemp);
@@ -59,7 +65,6 @@ mitodatatemp(:,1) = map2bin;
 mitodatatemp(:,2) = numnucl;
 mitodatatemp(:,3) = area;
 mitodatatemp(any(isnan(mitodatatemp), 2), :) = [];
-% mitodatatemp(mitodatatemp(:,1)==0, :) = [];
 
 mitodata = vertcat(mitodata,mitodatatemp);
 
@@ -71,17 +76,17 @@ lightGray = [0.7 0.7 0.7];
 darkGray = [0.3 0.3 0.3];
 
 xlimlow1 = 0;
-xlimup1 = 150;
+xlimup1 = 3;
 ylimup1 = 5;
 
 fontsize = 14;
 opacity = 0.5;
 
 ylabeltext1 = '# of nucleotides/mito';
-xlabeltext1 = 'Distance to soma [?m]';
+xlabeltext1 = 'Mitochondria area [um^2]';
 
 TFAMfig = figure('rend','painters','pos',[100 100 800 400]);
-h1 = scatter(mitodata(:,1),mitodata(:,2));
+h1 = scatter(mitodata(:,3),mitodata(:,2));
 xlim([xlimlow1 xlimup1])
 ylim([0 ylimup1])
 xlabel(xlabeltext1)
