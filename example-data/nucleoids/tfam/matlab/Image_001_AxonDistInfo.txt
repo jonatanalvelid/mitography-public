@@ -1,0 +1,2 @@
+ 	XSeed	YSeed	PrevDist
+1	570	420	0	

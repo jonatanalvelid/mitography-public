@@ -1,26 +1,33 @@
 %%%
-% Mitography - TFAM analysis - data plotting
-% Plotting the data from the TFAM analysis.
-%----------------------------
-% Version: 191217
-% Last updated features: New script
+% TFAM analysis - data plotting
+% Plotting the data from the TFAM analysis - number of nucleoids vs area.
 %
 % @jonatanalvelid
 %%%
 
-% clear
+clear
 
-% Add function folder to filepath, so that those functions can be read.
-functionFolder = fileparts(which('findFunctionFolders.m'));
-addpath(genpath(functionFolder));
+% Add functions folder to filepath and get data folder path
+filename = matlab.desktop.editor.getActiveFilename;
+parentfolder = getfield(fliplr(regexp(fileparts(fileparts(filename)),'/','split')),{1});
+doubleparentfolder = getfield(fliplr(regexp(fileparts(fileparts(fileparts(fileparts(filename)))),'/','split')),{1});
+functionsfolder = fullfile(parentfolder{1},'functions');
+addpath(functionsfolder);
+datafolder = fullfile(doubleparentfolder{1},'example-data');
 
-masterFolderPath = strcat(uigetdir('T:\Mitography'),'\');
+%%%
+% Parameters
+% data folder
+masterFolderPath = fullfile(datafolder,'nucleoids','tfam','matlab\');
+%%%
+
 fileList = dir(fullfile(masterFolderPath, 'Image_*.txt'));
 filenumbers = [];
 for i = 1:length(fileList)
     filenumbers(i) = str2num(fileList(i).name(7:9));
 end
 lastFileNumber = max(filenumbers);
+
 
 mitodatatemp = [];
 mitodata = [];
@@ -72,7 +79,7 @@ darkGray = [0.3 0.3 0.3];
 
 xlimlow1 = 0;
 xlimup1 = 150;
-ylimup1 = 5;
+ylimup1 = 10;
 
 fontsize = 14;
 opacity = 0.5;

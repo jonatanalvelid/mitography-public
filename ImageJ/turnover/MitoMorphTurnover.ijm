@@ -16,7 +16,7 @@ macro "Mitochondria analysis [F5]" {
 	filelist = getFileList(dir);
 	Array.sort(filelist);
 	filenamebase = "\\"+dir+"\\";
-	savedir = "E:\\PhD\\data_analysis\\Temp\\"
+	savedir = "D:\\Data analysis\\Temp\\"
 	
 	for(r=0;r<filelist.length/noImages;r++) {
 		imageindexes = newArray(noImages);
@@ -26,7 +26,7 @@ macro "Mitochondria analysis [F5]" {
 			open(filepath);
 			imagename = getTitle();
 			imageindexes[s] = getImageID();
-			if (endsWith(imagename, "_tmr.tif")) {
+			if (endsWith(imagename, "_vb.tif")) {
 				getPixelSize(unit, pixelWidth, pixelHeight);
 				getDimensions(width, height, channels, slices, frames);
 				run("Options...", "iterations=1 count=1 black");

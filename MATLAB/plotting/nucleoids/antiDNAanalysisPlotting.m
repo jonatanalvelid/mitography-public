@@ -77,7 +77,7 @@ darkGray = [0.3 0.3 0.3];
 
 xlimlow1 = 0;
 xlimup1 = 3;
-ylimup1 = 5;
+ylimup1 = 10;
 
 fontsize = 14;
 opacity = 0.5;
