@@ -1,6 +1,1 @@
-nuceloids/tfam - imagej and matlab
-morphology - imagej
-morphology/w.actin - imagej and matlab
-mitosox - raw, imagej
-tmre - imagej
 number-density - origin? also scripts for this, how do I get the numbers I have?

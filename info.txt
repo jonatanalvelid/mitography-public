@@ -8,6 +8,7 @@ example-data
 ------------
 Data is divided into folders for type of experiment, as well as subfolders with data prepared to be analysed by (1) imagej scripts that includes the raw images and in some cases pre-prepared binary images, and (2) matlab scripts that includes the imagej analysis results files in addition to the raw images needed for the matlab scritps. 
 morphology - data from experiments with mitochondrial outer membrane labeling to analyse mitochondrial morphology.
+morphology-actin - data from experiments with mitochondrial outer membrane labeling to analyse mitochondrial morphology as well as actin labeling to analyse the local actin structures are the positions of mitochondria. 
 fluo-signal-levels/mitosox/tmre - data from experiments with mitochondrial membrane labelling together with an additional label of oxphos, pex, or tmre.
 nucleoids - data from experiments with mitochondrial membrane labeling and labeling of the mitochondrial DNA material in nucleoids, with anti-dna or tfam labeling. 
 turnover - data from turnover experiments in div7 rat hippocampal neurons with two timepoints of omp25 labelling.
