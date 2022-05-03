@@ -5,8 +5,6 @@
 % simulate positions in the image, check if they are inside the actin
 % (i.e. inside the neuron) and if so, check the distance to the closest
 % actin patch P. Compare the resulting distribution with the real P dist.
-% @Jonatan Alvelid
-% Created: 2018-10-12
 %%%%%
 
 clear all
@@ -75,8 +73,6 @@ for fileNum = filenumbers
         pospix = find(imgneuron);
         for i = 1:noSim(fileNum)
             imsize = size(imgneuron);
-            %posx = rand()*imsize(2)*pixelsize;  % Position in the image in ?m
-            %posy = rand()*imsize(1)*pixelsize;  % Position in the image in ?m
             
             % Randomly pick one of the ~=0 pixels
             randidx = randperm(length(pospix),1);
@@ -90,9 +86,7 @@ for fileNum = filenumbers
                 distimg = bwdist(imgpatches)*pixelsize;
                 % Calculate the distance to the nearest actin patch
                 distance = distNearestActinPatch(posx,posy,pixelsize,distimg);
-                %allPatchDist(sum(noSim(1:fileNum-1))+i) = distance;
                 allPatchDist = [allPatchDist;distance];
-%                 disp(distance);
             end
         end
     catch err
@@ -105,6 +99,3 @@ nanstd(allPatchDist)
 
 histogram(allPatchDist,0:0.25:10,'Normalization','probability')
 ylim([0 0.25])
-
-%[h,p,k2stat] = kstest2(allPatchDist,mitopatchdistall);
-%p

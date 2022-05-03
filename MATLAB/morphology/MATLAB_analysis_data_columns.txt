@@ -2,30 +2,30 @@ MitoFullAnalysis columns:
 1 X-coord
 2 Y-coord
 3 Angle
-X 4 Area
+4 Area
 5 Length - ellipse
 6 Width (mito) - ellipse 
-X 7 Length - skeleton
-X 8 Width (mito) - fitted
+7 Length - skeleton
+8 Width (mito) - fitted
 9 Center position - fitted (0.375 = in the middle of line profile)
 10 Distance to nearest non-stripes patch in non-stripes mask
-X 11 Actin width - best fitted
+11 Actin width - best fitted
 12 Actin center position - best fitted (1 = in the middle of line profile)
-X 13 Stripes/no-stripes parameter (1=stripes)
-X 14 AIS/no-AIS parameter (1=AIS)
+13 Stripes/no-stripes parameter (1=stripes)
+14 AIS/no-AIS parameter (1=AIS)
 15 Mito small parameter (1=width smaller than 0.1um)
-X 16 Mito bigger than filament parameter (1=mitochondria bigger)
-X 17 Fitted mito width ratio - MitoUpper/MitoMid
-X 18 Fitted mito width ratio - MitoBottom/MitoMid
+16 Mito bigger than filament parameter (1=mitochondria bigger)
+17 Fitted mito width ratio - MitoUpper/MitoMid
+18 Fitted mito width ratio - MitoBottom/MitoMid
 19 Fitted mito width ratio - MitoBottom/MitoUpperMid
 20 Mito small area parameter (1=area smaller than 0.05 µm^2)
-X 21 Actin best fitted with double peak (1=double peak, 0=single peak or non-fitted)
-X 22 Actin best fitted with single peak (1=single peak, 0=double peak or non-fitted)
+21 Actin best fitted with double peak (1=double peak, 0=single peak or non-fitted)
+22 Actin best fitted with single peak (1=single peak, 0=double peak or non-fitted)
 23 Actin best peak finder - number of peaks
-X 24 Mito-actin distance (negative = mito outside actin)
+24 Mito-actin distance (negative = mito outside actin)
 25 Mito outside actin parameter (1=outside)
 26 Mito-patches overlapping area (in µm^2)
-X 27 Mito-patches percentual overlapping area (in % of mito area)
+27 Mito-patches percentual overlapping area (in % of mito area)
 28 Mito peak finder - number of peaks
 29 Mito fitted with double peak (1=double peak, 0=single peak of non-fitted) (from original analysis pre 180411)
 30 Mito fitted with single peak (1=single peak, 0=double peak of non-fitted) (from original analysis pre 180411)
@@ -37,7 +37,7 @@ X 27 Mito-patches percentual overlapping area (in % of mito area)
 36 (Imagewide) Mito-dendrite overlapping area (in µm^2)
 37 Mito upper center
 38 Mito bottom center
-X 39 Distance to nearest actin patch in patches binary
+39 Distance to nearest actin patch in patches binary
 40 Mito fit 1 - 1=Gaussian, 0=Lorentzian
 41 Mito fit 2 - Peak finder number of peaks
 42 Mito fit 3 - Width of single fit
@@ -101,7 +101,7 @@ X 39 Distance to nearest actin patch in patches binary
 100 Actin bottom 4 fitted with single peak (1=single peak, 0=double peak or non-fitted)
 101 Actin bottom 5 peak finder - number of peaks 
 102 
-X 103 Mito-actin distance 2 (D_2) - only positive values, do not throw away actin 2 peaks-negative D situations.
+103 Mito-actin distance 2 (D_2) - only positive values, do not throw away actin 2 peaks-negative D situations.
 104 Mito-actin distance 2 < 50 nm binary parameter (1 = (D2 < 50 nm))
 105
 106 Mito ellipticity (IF SEPARATE ANALYSIS HAS BEEN RUN) 

@@ -1,31 +1,39 @@
 Mitography scripts and example data
 -----------------------------------
-This is a suite of analysis scripts for the Mitography analysis, as used in the article Coceano et al. 2022 (in preparation). 
-
+This is a suite of analysis scripts for the Mitography analysis, as used in the article Coceano et al. 2022 (in preparation). Scripts are developed by Jonatan Alvelid.
+See below for a description of all the analysis scripts and what they are used for.
 
 
 example-data
 ------------
-
-
+Data is divided into folders for type of experiment, as well as subfolders with data prepared to be analysed by (1) imagej scripts that includes the raw images and in some cases pre-prepared binary images, and (2) matlab scripts that includes the imagej analysis results files in addition to the raw images needed for the matlab scritps. 
+morphology - data from experiments with mitochondrial outer membrane labeling to analyse mitochondrial morphology.
+fluo-signal-levels/mitosox/tmre - data from experiments with mitochondrial membrane labelling together with an additional label of oxphos, pex, or tmre.
+nucleoids - data from experiments with mitochondrial membrane labeling and labeling of the mitochondrial DNA material in nucleoids, with anti-dna or tfam labeling. 
+turnover - data from turnover experiments in div7 rat hippocampal neurons with two timepoints of omp25 labelling.
+number-density - data from analyed experiments for the number density of mitochondrial-derived membranes in neurons, split up on axons vs dendrites, different types of MDMs, and the content of OXPHOS or not.
 
 
 MATLAB
 ------------
-
-
+morphology - main analysis scripts for mitography - taking the results from the ImageJ scripts and fitting line profiles and summarizing all data for mitochondria morphology and mitochondria-actin connections. Various variants of the scripts for analysing also MitoSOX and TMRE analysed images.
+turnover - scripts for turnover analysis of the amount of new protein as compared to old protein per mitochondria from experiments to investigate the turnover rate of proteins in mitochondria (labeling time points: 0 h and 24 h).
+fluo-signal-levels - scripts for analysing the fluorescent signal levels inside mitochondria for various labelings of MitoSOX, OXPHOS and PEX, for comparing signal levels to morphological and locational parameters of the mitochondria. 
+nucleoids - analysis of the number of nucleoids in mitochondria and mitochondrial-derived membranes, from TFAM and anti-DNA labeling analysis.
+plotting - scripts for plotting the results of the various analysis from the other folders - mitography morphology, number density in neurites and nucleoids analysis. 
+process - scripts to process images; distance transform and deconvolve images in batch. 
+functions - various utility functions used in the other scripts.
+simulations - scripts for simulating confocal/STED imaging comparison of mitochondria, MPS ring XZ imaging comparison in different imaging modes (conf, 2DSTED, 3DSTED), and calculation of random mito-actin patch distance population from a neuritesbinary map. 
 
 
 ImageJ
 ------------
-
-
-
-
-Python
-------------
-
-
+Mitography - main analysis scripts for mitography, analysing either only mitochondria images or mitochondria and actin images, with pre-calculated binary masks. Outputs a CSV file with information per detected mitochondria as well as line profiles across mitochondria/and actin, for further processing in MATLAB.
+MitochondriaBinarization - scripts for binarizing mitochondria images with labeling of mitochondrial membranes (Tom20, OMP25, etc.).
+NeuritesBinarization - script for calculating a binary neurite map from background of mitochondria images or map2 images.
+OxphosBinarization - script for calculating a binary mask of OXPHOS images.
+TFAMmaximaFinder - script for detecting nucleoids based on TFAM (or antiDNA) labeling.
+utilities - scripts for automating various tasks on images such as renaming in bulk, transforming .msr to .tif, merging multiple channels etc.
 
 
 Contact

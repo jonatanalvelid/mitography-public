@@ -1,5 +1,5 @@
-openfolder = "E:/PhD/data_analysis/antimycin/exp5_jan21/oxphos/"
-savefolder = "E:/PhD/data_analysis/antimycin/exp5_jan21/oxphosbinary/"
+openfolder = "PATH/HERE"
+savefolder = "PATH/HERE"
 
 function binarize(inputfolder, outputfolder, filename) {
 	open(inputfolder + filename);
