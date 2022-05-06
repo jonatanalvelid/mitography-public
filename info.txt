@@ -10,7 +10,7 @@ Data is divided into folders for type of experiment, as well as subfolders with 
 morphology - data from experiments with mitochondrial outer membrane labeling to analyse mitochondrial morphology.
 morphology-actin - data from experiments with mitochondrial outer membrane labeling to analyse mitochondrial morphology as well as actin labeling to analyse the local actin structures are the positions of mitochondria. 
 fluo-signal-levels/mitosox/tmre - data from experiments with mitochondrial membrane labelling together with an additional label of oxphos, pex, or tmre.
-nucleoids - data from experiments with mitochondrial membrane labeling and labeling of the mitochondrial DNA material in nucleoids, with anti-dna or tfam labeling. 
+(((nucleoids - data from experiments with mitochondrial membrane labeling and labeling of the mitochondrial DNA material in nucleoids, with anti-dna or tfam labeling.)))
 turnover - data from turnover experiments in div7 rat hippocampal neurons with two timepoints of omp25 labelling.
 number-density - data from analyed experiments for the number density of mitochondrial-derived membranes in neurons, split up on axons vs dendrites, different types of MDMs, and the content of OXPHOS or not.
 
@@ -20,7 +20,7 @@ MATLAB
 morphology - main analysis scripts for mitography - taking the results from the ImageJ scripts and fitting line profiles and summarizing all data for mitochondria morphology and mitochondria-actin connections. Various variants of the scripts for analysing also MitoSOX and TMRE analysed images.
 turnover - scripts for turnover analysis of the amount of new protein as compared to old protein per mitochondria from experiments to investigate the turnover rate of proteins in mitochondria (labeling time points: 0 h and 24 h).
 fluo-signal-levels - scripts for analysing the fluorescent signal levels inside mitochondria for various labelings of MitoSOX, OXPHOS and PEX, for comparing signal levels to morphological and locational parameters of the mitochondria. 
-nucleoids - analysis of the number of nucleoids in mitochondria and mitochondrial-derived membranes, from TFAM and anti-DNA labeling analysis.
+(((nucleoids - analysis of the number of nucleoids in mitochondria and mitochondrial-derived membranes, from TFAM and anti-DNA labeling analysis.)))
 plotting - scripts for plotting the results of the various analysis from the other folders - mitography morphology, number density in neurites and nucleoids analysis. 
 process - scripts to process images; distance transform and deconvolve images in batch. 
 functions - various utility functions used in the other scripts.
@@ -33,7 +33,7 @@ Mitography - main analysis scripts for mitography, analysing either only mitocho
 MitochondriaBinarization - scripts for binarizing mitochondria images with labeling of mitochondrial membranes (Tom20, OMP25, etc.).
 NeuritesBinarization - script for calculating a binary neurite map from background of mitochondria images or map2 images.
 OxphosBinarization - script for calculating a binary mask of OXPHOS images.
-TFAMmaximaFinder - script for detecting nucleoids based on TFAM (or antiDNA) labeling.
+(((TFAMmaximaFinder - script for detecting nucleoids based on TFAM (or antiDNA) labeling.)))
 utilities - scripts for automating various tasks on images such as renaming in bulk, transforming .msr to .tif, merging multiple channels etc.
 
 

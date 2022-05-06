@@ -1,2 +1,0 @@
- 	PxWidth	PxLength
-1	29.897	29.897
