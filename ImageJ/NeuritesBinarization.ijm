@@ -5,11 +5,11 @@
 // that is NOT covered with dendrite marker.
 // Normally values around 0.7-0.9.
 // adjust thresh to background 
-percentImageBackground = 0.95;
-thresh = 4;
+percentImageBackground = 0.85;
+thresh = 3;
 numsmooth = 3;
-numdilate = 10;
-numerode = 2;
+numdil = 8;
+numerode = 5;
 
 setForegroundColor(255, 255, 255);
 
