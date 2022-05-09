@@ -37,6 +37,11 @@ OxphosBinarization - script for calculating a binary mask of OXPHOS images.
 utilities - scripts for automating various tasks on images such as renaming in bulk, transforming .msr to .tif, merging multiple channels etc.
 
 
+Python
+------------
+number-density - calculation and printing of number density analysis results.
+
+
 Contact
 ------------
 GitHub: jonatanalvelid
