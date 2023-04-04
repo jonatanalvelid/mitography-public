@@ -19,9 +19,16 @@ datafolder = fullfile(doubleparentfolder{1},'example-data');
 % deconvolution
 px_size = 30;  % pixel size in nm of input images
 fwhmpsf = 70;  % FWHM of imaging PSF in nm
-% data folder
-masterFolderPath = fullfile(datafolder,'tmre','raw\');
-masterFolderPathSave = fullfile(datafolder,'tmre','raw','rl\');
+% Use example data (True) or local data (False)
+example_data = false;
+% Data folder
+if example_data
+    masterFolderPath = fullfile(datafolder,'tmre','raw\');
+    masterFolderPathSave = fullfile(datafolder,'tmre','raw','rl\');
+else
+    masterFolderPath = strcat(uigetdir('X:\LOCAL\PATH\HERE'),'\');
+    masterFolderPathSave = strcat(uigetdir('X:\LOCAL\PATH\HERE'),'\');
+end
 %%%
 
 fileList = dir(fullfile(masterFolderPath, 'Image*.tif'));

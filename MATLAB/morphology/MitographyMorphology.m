@@ -17,8 +17,14 @@ datafolder = fullfile(doubleparentfolder{1},'example-data');
 
 %%%
 % Parameters
+% Use example data (True) or local data (False)
+example_data = false;
 % Data folder
-masterFolderPath = fullfile(datafolder,'morphology','matlab\');
+if example_data
+    masterFolderPath = fullfile(datafolder,'morphology','matlab\');
+else
+    masterFolderPath = strcat(uigetdir('X:\LOCAL\PATH\HERE'),'\');
+end
 % Maximum number of mitos per image
 mitosPerFile = 1000;
 % Threshold for fitting
@@ -28,7 +34,6 @@ mitoDoubleGaussTol2 = 0.7;
 gaussianFitting = 1;  % 0 for only Lorentzian fitting
 %%%
 
-%masterFolderPath = strcat(uigetdir('X:\Mitography\NEW\Antimycin Treatments_April2020\6h_5nM AA\Glucose_DIV8_280420_PEX14_MAP_OMP25'),'\');
 filenameparam = 'ImageJAnalysisParameters.txt';
 filepathparam = strcat(masterFolderPath,filenameparam);
 try

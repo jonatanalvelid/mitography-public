@@ -18,8 +18,14 @@ datafolder = fullfile(doubleparentfolder{1},'example-data');
 
 %%%
 % Parameters
-% data folder
-masterFolderPath = fullfile(datafolder,'turnover','\');  % no example data
+% Use example data (True) or local data (False)
+example_data = false;
+% Data folder
+if example_data
+    masterFolderPath = fullfile(datafolder,'turnover','\');  % no example data
+else
+    masterFolderPath = strcat(uigetdir('X:\LOCAL\PATH\HERE'),'\');
+end
 %%%
 
 fileList = dir(fullfile(masterFolderPath,'*_580.tif'));

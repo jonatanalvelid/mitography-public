@@ -2,6 +2,7 @@ Instructions for plotting Mitography morphology results:
 
 1. Run analysis.
 2. Run "MitographyResults..." for the variables you want to look at.
+    a. Choose if you want to use the example data (example_data=true) or local data (=false), and in the latter case exchange the file path with your local folder path.
 	a. Pick the folder in the first window that comes up.
 	b. Do nothing in the second window that comes up.
 	c. Press "Update Thresholds" on the GUI.

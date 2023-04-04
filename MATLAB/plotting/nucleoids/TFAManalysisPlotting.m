@@ -17,8 +17,14 @@ datafolder = fullfile(doubleparentfolder{1},'example-data');
 
 %%%
 % Parameters
-% data folder
-masterFolderPath = fullfile(datafolder,'nucleoids','tfam','matlab\');
+% Use example data (True) or local data (False)
+example_data = false;
+% Data folder
+if example_data
+    masterFolderPath = fullfile(datafolder,'nucleoids','tfam','matlab\');
+else
+    masterFolderPath = strcat(uigetdir('X:\LOCAL\PATH\HERE'),'\');
+end
 %%%
 
 fileList = dir(fullfile(masterFolderPath, 'Image_*.txt'));

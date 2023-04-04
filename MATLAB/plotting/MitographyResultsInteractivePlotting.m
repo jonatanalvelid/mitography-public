@@ -18,8 +18,14 @@ datafolder = fullfile(doubleparentfolder{1},'example-data');
 
 %%%
 % Parameters
+% Use example data (True) or local data (False)
+example_data = false;
 % Data folder
-masterFolderPath = fullfile(datafolder,'morphology','matlab\');
+if example_data
+    masterFolderPath = fullfile(datafolder,'morphology','matlab\');
+else
+    masterFolderPath = strcat(uigetdir('X:\LOCAL\PATH\HERE'),'\');
+end
 %
 fontSizeGlobal = 14;
 c = 0:0.001:1;

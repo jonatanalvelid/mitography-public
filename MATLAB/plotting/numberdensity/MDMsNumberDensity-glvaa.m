@@ -19,8 +19,16 @@ datafolder = fullfile(doubleparentfolder{1},'example-data');
 % Parameters
 % deconvolution
 save = 0;  % boolean for saving figs or not
-% data folder
-dirread = fullfile(datafolder,'numberdensity','oxphos-axde\');
+% Use example data (True) or local data (False)
+example_data = false;
+% Data folder
+if example_data
+    dirread = fullfile(datafolder,'numberdensity','oxphos-axde\');
+else
+    dirread = strcat(uigetdir('X:\LOCAL\PATH\HERE'),'\');
+end
+%%%
+
 %%%
 
 datalist = dir(fullfile(dirread,'*.mat'));

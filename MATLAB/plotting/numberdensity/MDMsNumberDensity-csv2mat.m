@@ -20,8 +20,14 @@ datafolder = fullfile(doubleparentfolder{1},'example-data');
 % deconvolution
 px_size = 30;  % pixel size in nm of input images
 fwhmpsf = 70;  % FWHM of imaging PSF in nm
-% data folder
-dirread = fullfile(datafolder,'numberdensity','oxphos-axde\');
+% Use example data (True) or local data (False)
+example_data = false;
+% Data folder
+if example_data
+    dirread = fullfile(datafolder,'numberdensity','oxphos-axde\');
+else
+    dirread = strcat(uigetdir('X:\LOCAL\PATH\HERE'),'\');
+end
 %%%
 
 datalist = dir(fullfile(dirread,'*.csv'));
