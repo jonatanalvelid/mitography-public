@@ -149,10 +149,10 @@ for imgNum = imgNumbers
             for i=1:sizeData(1)
                 % get binary img of single mitochondria
                 singlemitobinary = ismember(labelmito, i);
-                % get a list of mitosox and omp pixels in this area
+                % get a list of OXPHOS and OMP pixels in this area
                 oxphossignal = imageoxphos(singlemitobinary);
                 ompsignal = imageomp(singlemitobinary);
-                % get average MitoSOX and OMP signal/pixel per mito
+                % get average OXPHOS and OMP signal/pixel per mito
                 oxphossignalavg = mean(oxphossignal);
                 ompsignalavg = mean(ompsignal);
                 dataAnalysis(i,111) = oxphossignalavg;  % OXPHOS SIGNAL
@@ -165,7 +165,7 @@ for imgNum = imgNumbers
             threshsignal = oxphos_threshs(ind,2);
             %disp(imgNum),disp(fileNum),disp(cellnum),disp(ind),disp(threshsignal)
             
-            % save boolean variable for which mito has mitosox signal above
+            % save boolean variable for which mito has OXPHOS signal above
             % thresh (signal) and which are below (no signal)
             for i=1:sizeData(1)
                 oxphossignal = dataAnalysis(i,111);

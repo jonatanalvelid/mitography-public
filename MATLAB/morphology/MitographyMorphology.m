@@ -23,7 +23,7 @@ example_data = false;
 if example_data
     masterFolderPath = fullfile(datafolder,'morphology','matlab\');
 else
-    masterFolderPath = strcat(uigetdir('C:\Users\giovanna.coceano\Documents\temp'),'\');
+    masterFolderPath = strcat(uigetdir('X:\LOCAL\PATH\HERE'),'\');
 end
 
 % Maximum number of mitos per image

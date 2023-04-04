@@ -37,7 +37,6 @@ actinGaussMinDistance = 0.100;
 gaussianFitting = 1;  % 0 for only Lorentzian fitting
 %%%
 
-%masterFolderPath = strcat(uigetdir('X:\Mitography\NEW\Metabolism\Control\OMP25'),'\');
 filenameparam = 'ImageJAnalysisParameters.txt';
 filepathparam = strcat(masterFolderPath,filenameparam);
 try

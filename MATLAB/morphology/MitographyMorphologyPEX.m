@@ -1,5 +1,5 @@
 %%%
-% Mitography - morphology and TMRE
+% Mitography - morphology
 % Analyses all info and line profiles spitted out from the ImageJ
 % Mitography script, and gives the info per mitochondria out.
 %
@@ -21,10 +21,11 @@ datafolder = fullfile(doubleparentfolder{1},'example-data');
 example_data = false;
 % Data folder
 if example_data
-    masterFolderPath = fullfile(datafolder,'tmre','matlab\');
+    masterFolderPath = fullfile(datafolder,'morphology','matlab\');
 else
     masterFolderPath = strcat(uigetdir('X:\LOCAL\PATH\HERE'),'\');
 end
+
 % Maximum number of mitos per image
 mitosPerFile = 1000;
 % Threshold for fitting
@@ -40,6 +41,7 @@ try
     dataparam = readtable(filepathparam);
     mitoLineProfLength = dataparam.MitoLineProfLen;
     actinLineProfLength = dataparam.ActLineProfLen;
+   
 catch err
     mitoLineProfLength = input('What is the mitochondria line profile length (um)? ');
     actinLineProfLength = input('What is the actin line profile length (um)? ');
@@ -53,7 +55,6 @@ filenamebottom = '_MitoBottomLineProfiles.txt';
 filenameallPxs = '_PixelSizes.txt';
 filenameallMito = '_MitoAnalysis.txt';
 fileNumbers = 1:lastFileNumber;
-% fileNumbers = 23;
 
 %% 
 %%% MITOCHONDRIA FITTING BELOW
@@ -85,7 +86,7 @@ for fileNum = fileNumbers
         % Read the pixel size
         datapxs = dlmread(filepathpxs,'',1,1);
         pixelsize = datapxs(1,1);
-        
+
         % Fitting
         noProfiles = size(yprofmid);
         mitoWidths = zeros(noProfiles(2),5);
@@ -284,8 +285,20 @@ filenameMitoBinary = '_MitoBinary.tif';
 filenameSomaBinary = '-SomaBinary.tif';
 filenameBkgBinary = '-BkgBinary.tif';
 filenameAISBinary = '-AISBinary.tif';
-filenameTMRE = '-TMR.tif';
-filenameMito = '-Mitochondria.tif';
+filenameGenericBinary = '-GenericBinary.tif';
+filenameMito = '_OnlyMitoImage.tif';
+filenamePEX = '-pex.tif';
+
+filenamecellnum = 'cellnumber.txt';
+filenamepexthresh = 'pex-thresh.txt';
+try
+    filepathcellnum = strcat(masterFolderPath,filenamecellnum);
+    filepathpexthresh = strcat(masterFolderPath,filenamepexthresh);
+    cellnums = load(filepathcellnum);
+    pex_threshs = dlmread(filepathpexthresh,'\t',1,0);
+catch err
+    disp('You need to provide PEX signal thresholds (per cell) and cell numbers (per image) as a list, see line 292-298.')
+end
 
 for fileNum = fileNumbers
     
@@ -295,12 +308,13 @@ for fileNum = fileNumbers
     filepathUpperWid = strFilepath(fileNum,filenameUpperWidths,masterFolderPath);
     filepathBottomWid = strFilepath(fileNum,filenameBottomWidths,masterFolderPath);
     filepathpxs = strFilepath(fileNum,filenameallPxs,masterFolderPath);
-    filepathTMRE = strFilepath(fileNum,filenameTMRE,masterFolderPath);
     filepathMito = strFilepath(fileNum,filenameMito,masterFolderPath);
     filepathMitoBinary = strFilepath(fileNum,filenameMitoBinary,masterFolderPath);
     filepathSomaBinary = strFilepath(fileNum,filenameSomaBinary,masterFolderPath);
     filepathBkgBinary = strFilepath(fileNum,filenameBkgBinary,masterFolderPath);
     filepathAISBinary = strFilepath(fileNum,filenameAISBinary,masterFolderPath);
+    filepathGenericBinary = strFilepath(fileNum,filenameGenericBinary,masterFolderPath);
+    filepathPEX = strFilepath(fileNum,filenamePEX,masterFolderPath);
     filepathAllFitsWid = strFilepath(fileNum,filenameAllFitsWidths,masterFolderPath);
     filepathAllFitsUpperWid = strFilepath(fileNum,filenameAllFitsUpperWidths,masterFolderPath);
     filepathAllFitsBottomWid = strFilepath(fileNum,filenameAllFitsBottomWidths,masterFolderPath);
@@ -343,15 +357,18 @@ for fileNum = fileNumbers
             imagebkgbinary = logical(imagebkgbinary);
         end
         try
-            imagetmre = imread(filepathTMRE);
+            imagegenericmapbinary = imread(filepathGenericBinary);
+            imagegenericmapbinary = logical(imagegenericmapbinary);
         catch err
-            imagetmre = zeros(size(imagemitobinary));
+            imagegenericmapbinary = zeros(size(imagemitobinary));
+            imagegenericmapbinary = logical(imagegenericmapbinary);
         end
         try
-            imageomp = imread(filepathMito);
+            imagepex = imread(filepathPEX);
         catch err
-            imageomp = zeros(size(imagemitobinary));
+            imagepex = zeros(size(imagemitobinary));
         end
+        
 
         % Read the pixel size
         datapxs = dlmread(filepathpxs,'',1,1);
@@ -442,6 +459,18 @@ for fileNum = fileNumbers
             end
         end
         
+        %%% MITOCHONDRIA GENERIC BINARY MAP CHECK AND FLAGGING
+        if not(isempty(dataAnalysis))
+            for i=1:sizeData(1)
+                inbkgparam = mitoAIS(dataAnalysis(i,1),dataAnalysis(i,2),pixelsize,imagegenericmapbinary);
+                if inbkgparam ~= 0
+                    dataAnalysis(i,14) = 1;  % BINARY
+                elseif inbkgparam == 0
+                    dataAnalysis(i,14) = 0;  % BINARY
+                end
+            end
+        end
+ 
         %%% MITOCHONDRIA BINARY BORDER CHECK AND FLAGGING
         if not(isempty(dataAnalysis))
             for i=1:sizeData(1)
@@ -464,69 +493,39 @@ for fileNum = fileNumbers
             end
         end
         
-        %%% MITOCHONDRIA TMRE CHECK AND FLAGGING & OMP25 SIGNAL CHECK
+        %%% MITOCHONDRIA PEX CHECK AND FLAGGING & OMP25 SIGNAL CHECK
         if not(isempty(dataAnalysis))
             for i=1:sizeData(1)
                 % get binary img of single mitochondria
                 singlemitobinary = ismember(labelmito, i);
-                % get a list of tmre and omp pixels in this area
-                tmresignal = imagetmre(singlemitobinary);
+                % get a list of PEX and OMP pixels in this area
+                pexsignal = imagepex(singlemitobinary);
                 ompsignal = imageomp(singlemitobinary);
-                % get average TMRE and OMP signal/pixel per mito
-                tmresignalavg = mean(tmresignal);
+                % get average PEX and OMP signal/pixel per mito
+                pexsignalavg = mean(pexsignal);
                 ompsignalavg = mean(ompsignal);
-                dataAnalysis(i,111) = tmresignalavg;  % TMRE SIGNAL
+                dataAnalysis(i,111) = pexsignalavg;  % PEX SIGNAL
                 dataAnalysis(i,115) = ompsignalavg;  % OMP25 SIGNAL
             end
 
-            %decide what is the limiting TMRE signal for positive/negative
-            %signal, and save another variable - boolean yes/no
-            % find thresh by double gaussian fit and find intersection
-            numgroups = round(3*sqrt(sizeData(1)));
-            tmrevals = dataAnalysis(:,111);
-            [cnts,edges] = histcounts(tmrevals,numgroups);
-            edges(end) = [];
-            cnts = cnts/max(cnts);
-            x = edges + (edges(2)-edges(1))/2;
-            [xData, yData] = prepareCurveData(x, cnts);
-
-            % Set up fittype and options.
-            % gaussian bkg + gaussian signal
-            ft = fittype( 'a*exp(-x/b)+a1*exp(-((x-b1)/c1)^2)', 'independent', 'x', 'dependent', 'y' );
-            opts = fitoptions( 'Method', 'NonlinearLeastSquares' );
-            opts.Display = 'Off';
-            opts.Lower = [0 0 0.3 max(tmrevals)*1/4 max(tmrevals)*1/8];
-            opts.StartPoint = [1 0.5 1 max(tmrevals)*1/2 max(tmrevals)*1/2];
-            opts.Upper = [10 1.5 10 max(tmrevals)*3/4 max(tmrevals)];
-
-            % Fit model to data.
-            [fitresult, gof] = fit(xData, yData, ft, opts);
-            cfs = coeffvalues(fitresult);
+            % read PEX threshold signal for the right cell number
+            cellnum = cellnums(fileNum);
+            ind = pex_threshs(:,1) == cellnum;
+            threshsignal = pex_threshs(ind,2);
+            %disp(imgNum),disp(fileNum),disp(cellnum),disp(ind),disp(threshsignal)
             
-            % sample the space and get the fitted gaussians
-            stepsize = x(end)/max(2*max(tmrevals), 100);
-            xsampl = 0:stepsize:x(end);
-            % exp + gaussian
-            bkg = cfs(1).*exp(-xsampl./cfs(3));
-            signalgauss = cfs(2).*exp(-((xsampl-cfs(4))./cfs(5)).^2);
-            % compare gaussians and set threshold to where they cross
-            compsign = abs(bkg-signalgauss);
-            compsign = compsign(1:round(cfs(4)/stepsize));
-            [~,idx] = min(compsign);
-            threshsignal = xsampl(idx);
-            
-            % save boolean variable for which mito has TMR signal above
+            % save boolean variable for which mito has PEX signal above
             % thresh (signal) and which are below (no signal)
             for i=1:sizeData(1)
-                tmresignal = dataAnalysis(i,111);
-                if tmresignal > threshsignal
-                    dataAnalysis(i,112) = 1;  % TMRE PARAM
+                pexsignal = dataAnalysis(i,111);
+                if pexsignal > threshsignal
+                    dataAnalysis(i,112) = 1;  % PEX PARAM
                 else
                     dataAnalysis(i,112) = 0;
                 end
             end
         end
-        
+
         %%% ALL MITOCHONDRIA FITTING DATA AND PARAMETERS
         if not(isempty(dataAnalysis))
             for i=1:sizeData(1)

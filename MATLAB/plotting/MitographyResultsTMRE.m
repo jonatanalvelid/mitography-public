@@ -127,14 +127,13 @@ mitoArea = [];
 mitoTMRE = [];
 mitoOMP = [];
 mitoTMREparam = [];
-mitodoublepeakparam = [];
 
 for fileNum=fileNumbers
     for i=1:mitosPerFile
         allcheck = somaParamFiles(i,2,fileNum) | borderParamFiles(i,2,fileNum) | bkgParamFiles(i,2,fileNum);
         if mitoWidthFiles(i,2,fileNum) ~= 0 && ~allcheck
             % Calculate AR as w_ell/l_ell if the area is small enough
-            % (A<0.2 ?m^2), while instead use w_fit/l_ell if the
+            % (A<0.2 um^2), while instead use w_fit/l_ell if the
             % mitochondria is bigger. The fitted width will always be the
             % more accurate width, but since we don't have a completely 
             % accurate (fitted) length for the small mitos, the AR will be 
@@ -152,12 +151,11 @@ for fileNum=fileNumbers
             mitoArea = [mitoArea; mitoAreaFiles(i,2,fileNum)];
             mitoLength = [mitoLength; mitoLengthFiles(i,2,fileNum)];
             mitoAR = [mitoAR; ARtemp];
-            mitoTMRE = [mitoTMRE; tmrevalFiles(i,2,fileNum)];
             mitoOMP = [mitoOMP; ompvalFiles(i,2,fileNum)];
+            mitoTMRE = [mitoTMRE; tmrevalFiles(i,2,fileNum)];
             mitoTMREparam = [mitoTMREparam; tmreParamFiles(i,2,fileNum)];
-            mitodoublepeakparam = [mitodoublepeakparam; doublepeakfitFiles(i,2,fileNum)];
         end
     end 
 end
 
-clearvars -except mitoWidth mitoArea mitoLength mitoAR mitoTMRE mitoOMP mitoTMREparam mitodoublepeakparam
+clearvars -except mitoWidth mitoArea mitoLength mitoAR mitoOMP mitoTMRE mitoTMREparam 

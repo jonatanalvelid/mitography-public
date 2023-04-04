@@ -52,8 +52,8 @@ mitoWidthFiles = zeros(mitosPerFile,2,lastFileNumber);
 mitoWidthEllFiles = zeros(mitosPerFile,2,lastFileNumber);
 mitoLengthFiles = zeros(mitosPerFile,2,lastFileNumber);
 mitoAreaFiles = zeros(mitosPerFile,2,lastFileNumber);
-mitosoxParamFiles = zeros(mitosPerFile,2,lastFileNumber);
-mitosoxvalFiles = zeros(mitosPerFile,2,lastFileNumber);
+pexParamFiles = zeros(mitosPerFile,2,lastFileNumber);
+pexvalFiles = zeros(mitosPerFile,2,lastFileNumber);
 ompvalFiles = zeros(mitosPerFile,2,lastFileNumber);
 somaParamFiles = zeros(mitosPerFile,2,lastFileNumber);
 borderParamFiles = zeros(mitosPerFile,2,lastFileNumber);
@@ -72,8 +72,8 @@ for fileNum = fileNumbers
         lengthMito = data(1:end,5); %Ellipsoidal fit mitochondria length (major axis)
         widthEllMito = data(1:end,6); %Ellipsoidal fit mitochondria width (minor axis)
         lengthSkelMito = data(1:end,7); %Skeleton mitochondria length (skeleton part closest to the mitochondria centroid)
-        mitosoxval = data(1:end,111);
-        mitosoxparam = data(1:end,112);
+        pexval = data(1:end,111);
+        pexparam = data(1:end,112);
         ompval = data(1:end,115);
         
         somaparam = data(1:end,109);
@@ -91,10 +91,10 @@ for fileNum = fileNumbers
                 mitoLengthFiles(i,2,fileNum) = max(lengthMito(i),lengthSkelMito(i));
             end
             
-            mitosoxParamFiles(i,1,fileNum) = i;
-            mitosoxParamFiles(i,2,fileNum) = mitosoxparam(i);
-            mitosoxvalFiles(i,1,fileNum) = i;
-            mitosoxvalFiles(i,2,fileNum) = mitosoxval(i);
+            pexParamFiles(i,1,fileNum) = i;
+            pexParamFiles(i,2,fileNum) = pexparam(i);
+            pexvalFiles(i,1,fileNum) = i;
+            pexvalFiles(i,2,fileNum) = pexval(i);
             ompvalFiles(i,1,fileNum) = i;
             ompvalFiles(i,2,fileNum) = ompval(i);
             
@@ -113,17 +113,16 @@ mitoWidth = [];
 mitoLength = [];
 mitoAR = [];
 mitoArea = [];
-mitoPEX = [];
 mitoOMP = [];
+mitoPEX = [];
 mitoPEXparam = [];
-mitodoublepeakparam = [];
 
 for fileNum=fileNumbers
     for i=1:mitosPerFile
         allcheck = somaParamFiles(i,2,fileNum) | borderParamFiles(i,2,fileNum);
         if mitoWidthEllFiles(i,2,fileNum) ~= 0 && ~allcheck
             % Calculate AR as w_ell/l_ell if the area is small enough
-            % (A<0.2 ??m^2), while instead use w_fit/l_ell if the
+            % (A<0.2 um^2), while instead use w_fit/l_ell if the
             % mitochondria is bigger. The fitted width will always be the
             % more accurate width, but since we don't have a completely 
             % accurate (fitted) length for the small mitos, the AR will be 
@@ -137,11 +136,11 @@ for fileNum=fileNumbers
             mitoArea = [mitoArea; mitoAreaFiles(i,2,fileNum)];
             mitoLength = [mitoLength; mitoLengthFiles(i,2,fileNum)];
             mitoAR = [mitoAR; ARtemp];
-            mitoPEX = [mitoPEX; mitosoxvalFiles(i,2,fileNum)];
             mitoOMP = [mitoOMP; ompvalFiles(i,2,fileNum)];
-            mitoPEXparam = [mitoPEXparam; mitosoxParamFiles(i,2,fileNum)];
+            mitoPEX = [mitoPEX; pexvalFiles(i,2,fileNum)];
+            mitoPEXparam = [mitoPEXparam; pexParamFiles(i,2,fileNum)];
         end
     end 
 end
 
-clearvars -except mitoWidth mitoArea mitoLength mitoAR mitoPEX mitoOMP mitoPEXparam
+clearvars -except mitoWidth mitoArea mitoLength mitoAR mitoOMP mitoPEX mitoPEXparam

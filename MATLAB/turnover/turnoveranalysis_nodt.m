@@ -28,9 +28,13 @@ if example_data
 else
     masterFolderPath = strcat(uigetdir('X:\LOCAL\PATH\HERE'),'\');
 end
+% Filename endings for the two images with there different labels: label 1
+% and label 2
+filenameLabel1 = '_label1.tif';
+filenameLabel2 = '_label2.tif';
 %%%
 
-fileList = dir(fullfile(masterFolderPath,'*_580.tif'));
+fileList = dir(fullfile(masterFolderPath,'*'+filenameLabel1));
 for i = 1:length(fileList)
     filenumbers(i) = str2double(fileList(i).name(1:3));
 end
@@ -42,8 +46,6 @@ filenameallMito = '_MitoAnalysis.txt';
 filenameMitoBinary = '_mitobinary.tif';
 filenameSomaBinary = '_somabinary.tif';
 filenameNeuritesdt = '_neuritesbinary_dt.tif';
-filenameTMR = '_vb.tif';
-filenameSiR = '_580.tif';
 filenameAnalysisSave = '_turnoveranalysis.txt';
 
 for fileNum = filenumbers
@@ -52,8 +54,8 @@ for fileNum = filenumbers
     filepathMitoBinary = strFilepath2(fileNum,filenameMitoBinary,masterFolderPath);
     filepathSomaBinary = strFilepath2(fileNum,filenameSomaBinary,masterFolderPath);
     filepathNeuritesdt = strFilepath2(fileNum,filenameNeuritesdt,masterFolderPath);
-    filepathSiR = strFilepath2(fileNum,filenameSiR,masterFolderPath);
-    filepathTMR = strFilepath2(fileNum,filenameTMR,masterFolderPath);
+    filepathLabel1 = strFilepath2(fileNum,filenameLabel1,masterFolderPath);
+    filepathLabel2 = strFilepath2(fileNum,filenameLabel2,masterFolderPath);
     
     filepathAnaSave = strFilepath2(fileNum,filenameAnalysisSave,masterFolderPath);
     
@@ -71,11 +73,11 @@ for fileNum = filenumbers
         %imagemitobinary = imclearborder(imagemitobinary);  % not including mitochondria at border
         imsize = size(imagemitobinary);
         
-        % Load tmr image 
-        imagetmr = imread(filepathTMR);
+        % Load label 1 image 
+        imagelabel1 = imread(filepathLabel1);
         
-        % Load sir image 
-        imagesir = imread(filepathSiR);
+        % Load label 2 image 
+        imagelabel2 = imread(filepathLabel2);
         
         % Remove small objects and make labelled binary mitochondria image
         %imagemitobinary = bwareaopen(imagemitobinary, threshsize);
@@ -118,15 +120,15 @@ for fileNum = filenumbers
         % Round the distances to three decimals
         datamito(:,params+2) = round(datamito(:,params+2),2);
         
-        % Get total tmr and sir signal in each mito and save to mitoinfo
+        % Get total label 1 and label 2 signal in each mito and save to mitoinfo
         imj_circ_corr = 0.8;
         for i = 1:num
             singlemitobinary = ismember(labelmito, i);
             mitocirc = regionprops(singlemitobinary,{'Circularity'});
-            singlemitotmr = imagetmr(singlemitobinary);
-            singlemitosir = imagesir(singlemitobinary);
-            datamito(i,params+3) = sum(singlemitotmr);  % Total TMR signal
-            datamito(i,params+4) = sum(singlemitosir);  % Total SiR signal
+            singlemitolabel1 = imagelabel1(singlemitobinary);
+            singlemitolabel2 = imagelabel2(singlemitobinary);
+            datamito(i,params+3) = sum(singlemitolabel1);  % Total label 1 signal
+            datamito(i,params+4) = sum(singlemitolabel2);  % Total label 2 signal
             datamito(i,params+5) = mitocirc.Circularity * imj_circ_corr;  % Mito circularity, with a correction factor to be similar to the ImageJ circularity
         end
 

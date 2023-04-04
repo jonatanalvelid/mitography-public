@@ -34,7 +34,6 @@ mitoDoubleGaussTol2 = 0.7;
 gaussianFitting = 1;  % 0 for only Lorentzian fitting
 %%%
 
-%masterFolderPath = strcat(uigetdir('E:\PhD\Data analysis\Mitography - temp copy\MitoSOX\MATLAB-RL-new'),'\');
 filenameparam = 'ImageJAnalysisParameters.txt';
 filepathparam = strcat(masterFolderPath,filenameparam);
 try

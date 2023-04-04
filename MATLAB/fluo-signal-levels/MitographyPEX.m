@@ -34,22 +34,22 @@ filenameAnalysis = '_MitoAnalysis.txt';
 filenameAnalysisSave = '_MitoAnalysisFull.txt';
 filenameMitoBinary = '_MitoBinary.tif';
 filenameSomaBinary = '-SomaBinary.tif';
-filenameMitoSOX = '-pex.tif';
+filenamePEX = '-pex.tif';
 filenameMito = '-Mitochondria.tif';
 
 filenamecellnum = 'cellnumber.txt';
-filenameoxphosthresh = 'pex-thresh.txt';
+filenamepexthresh = 'pex-thresh.txt';
 filepathcellnum = strcat(masterFolderPath,filenamecellnum);
-filepathoxphosthresh = strcat(masterFolderPath,filenameoxphosthresh);
+filepathpexthresh = strcat(masterFolderPath,filenamepexthresh);
 cellnums = load(filepathcellnum);
-oxphos_threshs = dlmread(filepathoxphosthresh,'\t',1,0);
+pex_threshs = dlmread(filepathpexthresh,'\t',1,0);
 
 fileNum = 1;
 for imgNum = imgNumbers
     filepathAnaSave = strFilepath(imgNum,filenameAnalysisSave,masterFolderPath);
     filepathAna = strFilepath(imgNum,filenameAnalysis,masterFolderPath);
     filepathpxs = strFilepath(imgNum,filenameallPxs,masterFolderPath);
-    filepathMitoSOX = strFilepath(imgNum,filenameMitoSOX,masterFolderPath);
+    filepathPEX = strFilepath(imgNum,filenamePEX,masterFolderPath);
     filepathMito = strFilepath(imgNum,filenameMito,masterFolderPath);
     filepathMitoBinary = strFilepath(imgNum,filenameMitoBinary,masterFolderPath);
     filepathSomaBinary = strFilepath(imgNum,filenameSomaBinary,masterFolderPath);
@@ -86,9 +86,9 @@ for imgNum = imgNumbers
             imagebkgbinary = logical(imagebkgbinary);
         end
         try
-            imagemitosox = imread(filepathMitoSOX);
+            imagepex = imread(filepathPEX);
         catch err
-            imagemitosox = zeros(size(imagemitobinary));
+            imagepex = zeros(size(imagemitobinary));
         end
         try
             imageomp = imread(filepathMito);
@@ -139,27 +139,27 @@ for imgNum = imgNumbers
             for i=1:sizeData(1)
                 % get binary img of single mitochondria
                 singlemitobinary = ismember(labelmito, i);
-                % get a list of mitosox and omp pixels in this area
-                mitosoxsignal = imagemitosox(singlemitobinary);
+                % get a list of PEX and OMP pixels in this area
+                pexsignal = imagepex(singlemitobinary);
                 ompsignal = imageomp(singlemitobinary);
-                % get average MitoSOX and OMP signal/pixel per mito
-                mitosoxsignalavg = mean(mitosoxsignal);
+                % get average PEX and OMP signal/pixel per mito
+                pexsignalavg = mean(pexsignal);
                 ompsignalavg = mean(ompsignal);
-                dataAnalysis(i,111) = mitosoxsignalavg;  % PEX SIGNAL
+                dataAnalysis(i,111) = pexsignalavg;  % PEX SIGNAL
                 dataAnalysis(i,115) = ompsignalavg;  % OMP25 SIGNAL
             end
 
-            % read oxphos threshold signal for the right cell number
+            % read PEX threshold signal for the right cell number
             cellnum = cellnums(fileNum);
-            ind = oxphos_threshs(:,1) == cellnum;
-            threshsignal = oxphos_threshs(ind,2);
+            ind = pex_threshs(:,1) == cellnum;
+            threshsignal = pex_threshs(ind,2);
             %disp(imgNum),disp(fileNum),disp(cellnum),disp(ind),disp(threshsignal)
             
-            % save boolean variable for which mito has mitosox signal above
+            % save boolean variable for which mito has PEX signal above
             % thresh (signal) and which are below (no signal)
             for i=1:sizeData(1)
-                mitosoxsignal = dataAnalysis(i,111);
-                if mitosoxsignal > threshsignal
+                pexsignal = dataAnalysis(i,111);
+                if pexsignal > threshsignal
                     dataAnalysis(i,112) = 1;  % PEX PARAM
                 else
                     dataAnalysis(i,112) = 0;
