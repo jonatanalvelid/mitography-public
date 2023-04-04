@@ -23,8 +23,9 @@ example_data = false;
 if example_data
     masterFolderPath = fullfile(datafolder,'morphology','matlab\');
 else
-    masterFolderPath = strcat(uigetdir('X:\LOCAL\PATH\HERE'),'\');
+    masterFolderPath = strcat(uigetdir('C:\Users\giovanna.coceano\Documents\temp'),'\');
 end
+
 % Maximum number of mitos per image
 mitosPerFile = 1000;
 % Threshold for fitting
@@ -40,6 +41,7 @@ try
     dataparam = readtable(filepathparam);
     mitoLineProfLength = dataparam.MitoLineProfLen;
     actinLineProfLength = dataparam.ActLineProfLen;
+   
 catch err
     mitoLineProfLength = input('What is the mitochondria line profile length (um)? ');
     actinLineProfLength = input('What is the actin line profile length (um)? ');
@@ -84,7 +86,7 @@ for fileNum = fileNumbers
         % Read the pixel size
         datapxs = dlmread(filepathpxs,'',1,1);
         pixelsize = datapxs(1,1);
-        
+
         % Fitting
         noProfiles = size(yprofmid);
         mitoWidths = zeros(noProfiles(2),5);

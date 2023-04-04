@@ -2,10 +2,12 @@
 // Type 1 - global thresholding
 run("Conversions...", " ");
 
+setOption("BlackBackground", true);
+
 // Thresholds to adjust to signal and background levels
-thresh1 = 17;
+thresh1 = 8;
 thresh2 = thresh1-5;
-smoothsize = 0.03;
+smoothsize = 0.02;
 
 getPixelSize(unit, pixelWidth, pixelHeight);
 getDimensions(width, height, channels, slices, frames);
@@ -57,6 +59,5 @@ selectWindow("mitobinaryalt2");
 run("Close");
 selectWindow("mitobinaryaltraw");
 run("Close");
-selectWindow("MitoOriginalImageSoma");
-run("Close");
+
 

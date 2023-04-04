@@ -23,14 +23,13 @@ example_data = false;
 if example_data
     masterFolderPath = fullfile(datafolder,'morphology','matlab\');
 else
-    masterFolderPath = strcat(uigetdir('X:\LOCAL\PATH\HERE'),'\');
+    masterFolderPath = strcat(uigetdir('C:\\Users\\giovanna.coceano\\Documents\\temp\\'),'\');
 end
 %
 areathresh_wEll = 0.1;
 mitosPerFile = 1000;
-lastFileNumber = 3;
+lastFileNumber = 12;
 %%%
-
 filenameparam = 'ImageJAnalysisParameters.txt';
 filepathparam = strcat(masterFolderPath,filenameparam);   
 try
