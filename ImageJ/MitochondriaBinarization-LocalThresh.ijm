@@ -65,11 +65,11 @@ run("Erode");
 run("Dilate");
 run("Fill Holes");
 
-selectWindow("mitobinaryalt");
-rename("mitobinary");
-
 filename = substring(imnameor,0,9)+"_MitoBinary"+".tif";
 saveAs("Tiff", savefolder+filename);
+
+selectWindow("mitobinaryalt");
+rename("mitobinary");
 
 selectWindow("mitobinary");
 run("Close");
