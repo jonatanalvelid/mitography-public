@@ -55,6 +55,7 @@ doublepeakfitFiles = zeros(mitosPerFile,2,lastFileNumber);
 somaParamFiles = zeros(mitosPerFile,2,lastFileNumber);
 borderParamFiles = zeros(mitosPerFile,2,lastFileNumber);
 bkgParamFiles = zeros(mitosPerFile,2,lastFileNumber);
+genericBinaryParamFiles = zeros(mitosPerFile,2,lastFileNumber);
 
 for fileNum = fileNumbers
     if fileNum < 10
@@ -76,6 +77,7 @@ for fileNum = fileNumbers
         somaparam = data(1:end,109);
         borderparam = data(1:end,110);
         bkgparam = data(1:end,116);
+        genericbinaryparam = data(1:end,14);
 
         for i=1:length(areaMito)
             mitoAreaFiles(i,1,fileNum) = i;
@@ -99,6 +101,8 @@ for fileNum = fileNumbers
             borderParamFiles(i,2,fileNum) = borderparam(i);
             bkgParamFiles(i,1,fileNum) = i;
             bkgParamFiles(i,2,fileNum) = bkgparam(i);
+            genericBinaryParamFiles(i,1,fileNum) = i;
+            genericBinaryParamFiles(i,2,fileNum) = genericbinaryparam(i);
             
         end
     catch err
@@ -111,6 +115,7 @@ mitoLength = [];
 mitoAR = [];
 mitoArea = [];
 mitodoublepeakparam = [];
+mitogenericbinaryparam = [];
 
 for fileNum=fileNumbers
     for i=1:mitosPerFile
@@ -137,9 +142,10 @@ for fileNum=fileNumbers
             mitoLength = [mitoLength; mitoLengthFiles(i,2,fileNum)];
             mitoAR = [mitoAR; ARtemp];
             mitodoublepeakparam = [mitodoublepeakparam; doublepeakfitFiles(i,2,fileNum)];
+            mitogenericbinaryparam = [mitogenericbinaryparam; genericBinaryParamFiles(i,2,fileNum)];
         end
     end 
 end
 
 
-clearvars -except mitoWidth mitoArea mitoLength mitoAR mitodoublepeakparam
+clearvars -except mitoWidth mitoArea mitoLength mitoAR mitodoublepeakparam mitogenericbinaryparam
