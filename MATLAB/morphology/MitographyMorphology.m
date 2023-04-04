@@ -285,6 +285,7 @@ filenameMitoBinary = '_MitoBinary.tif';
 filenameSomaBinary = '-SomaBinary.tif';
 filenameBkgBinary = '-BkgBinary.tif';
 filenameAISBinary = '-AISBinary.tif';
+filenameGenericBinary = '-GenericBinary.tif';
 filenameMito = '_OnlyMitoImage.tif';
 
 for fileNum = fileNumbers
@@ -300,6 +301,7 @@ for fileNum = fileNumbers
     filepathSomaBinary = strFilepath(fileNum,filenameSomaBinary,masterFolderPath);
     filepathBkgBinary = strFilepath(fileNum,filenameBkgBinary,masterFolderPath);
     filepathAISBinary = strFilepath(fileNum,filenameAISBinary,masterFolderPath);
+    filepathGenericBinary = strFilepath(fileNum,filenameGenericBinary,masterFolderPath);
     filepathAllFitsWid = strFilepath(fileNum,filenameAllFitsWidths,masterFolderPath);
     filepathAllFitsUpperWid = strFilepath(fileNum,filenameAllFitsUpperWidths,masterFolderPath);
     filepathAllFitsBottomWid = strFilepath(fileNum,filenameAllFitsBottomWidths,masterFolderPath);
@@ -341,6 +343,14 @@ for fileNum = fileNumbers
             imagebkgbinary = zeros(size(imagemitobinary));
             imagebkgbinary = logical(imagebkgbinary);
         end
+        try
+            imagegenericmapbinary = imread(filepathGenericBinary);
+            imagegenericmapbinary = logical(imagegenericmapbinary);
+        catch err
+            imagegenericmapbinary = zeros(size(imagemitobinary));
+            imagegenericmapbinary = logical(imagegenericmapbinary);
+        end
+        
 
         % Read the pixel size
         datapxs = dlmread(filepathpxs,'',1,1);
@@ -431,6 +441,18 @@ for fileNum = fileNumbers
             end
         end
         
+        %%% MITOCHONDRIA GENERIC BINARY MAP CHECK AND FLAGGING
+        if not(isempty(dataAnalysis))
+            for i=1:sizeData(1)
+                inbkgparam = mitoAIS(dataAnalysis(i,1),dataAnalysis(i,2),pixelsize,imagegenericmapbinary);
+                if inbkgparam ~= 0
+                    dataAnalysis(i,14) = 1;  % BINARY
+                elseif inbkgparam == 0
+                    dataAnalysis(i,14) = 0;  % BINARY
+                end
+            end
+        end
+ 
         %%% MITOCHONDRIA BINARY BORDER CHECK AND FLAGGING
         if not(isempty(dataAnalysis))
             for i=1:sizeData(1)
