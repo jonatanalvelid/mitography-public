@@ -2,12 +2,20 @@
 // Type 2 - local thresholding
 run("Conversions...", " ");
 
+setOption("BlackBackground", true);
+
+//////////////////////////////////
+
 // Threshold to adjust to background levels
 thresh1 = 2;
 // Adjust localradius and contrastthresh for local thresholding depending on the signal level and resolution
 //localradius = ~7-10;	contrastthresh = ~3-15;
 localradius = 8;
 contrastthresh = 3;
+
+savefolder = "C:\\SAVE\\PATH\\HERE\\"
+
+//////////////////////////////////
 
 localthresholdmethod = "Bernsen";  //local thresholding method to use.
 
@@ -59,6 +67,10 @@ run("Fill Holes");
 
 selectWindow("mitobinaryalt");
 rename("mitobinary");
+
+filename = substring(imnameor,0,9)+"_MitoBinary"+".tif";
+saveAs("Tiff", savefolder+filename);
+
 selectWindow("mitobinary");
 run("Close");
 selectWindow("mitobinaryalt2");

@@ -4,10 +4,16 @@ run("Conversions...", " ");
 
 setOption("BlackBackground", true);
 
+//////////////////////////////////
+
 // Thresholds to adjust to signal and background levels
 thresh1 = 8;
 thresh2 = thresh1-5;
 smoothsize = 0.02;
+
+savefolder = "C:\\SAVE\\PATH\\HERE\\"
+
+//////////////////////////////////
 
 getPixelSize(unit, pixelWidth, pixelHeight);
 getDimensions(width, height, channels, slices, frames);
@@ -50,6 +56,9 @@ rename("bernsen");
 setThreshold(thresh2, 255);
 run("Convert to Mask");
 run("Make Binary");
+
+filename = substring(imnameor,0,9)+"_MitoBinary"+".tif";
+saveAs("Tiff", savefolder+filename);
 
 selectWindow("mitobinaryalt");
 rename("mitobinary");

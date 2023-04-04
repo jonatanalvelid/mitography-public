@@ -3,6 +3,8 @@
 run("Conversions...", " ");
 imgname = getTitle()
 
+//////////////////////////////////
+
 // Parameters
 // Thresholds to adjust to signal and background levels
 thresh1 = 15;
@@ -12,6 +14,8 @@ smoothsize = 0.03;
 savefolder = "D:/Data analysis/Mitography/AA-PEX/analysis-pex_start/exp1aa/pexbinary/"
 // Img number
 imgnumber = substring(imgname, 6, 9)
+
+//////////////////////////////////
 
 getPixelSize(unit, pixelWidth, pixelHeight);
 getDimensions(width, height, channels, slices, frames);

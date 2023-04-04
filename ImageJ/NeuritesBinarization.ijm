@@ -1,6 +1,8 @@
 // Binarize an image (map2, mito membrane marker bkg, etc) to a binary
 // image of the whole neurites, for lengthwise distance-to-soma analyses
 
+//////////////////////////////////
+
 // adjust percentImageBackground number to ~the percent of the image
 // that is NOT covered with dendrite marker.
 // Normally values around 0.7-0.9.
@@ -10,6 +12,10 @@ thresh = 3;
 numsmooth = 3;
 numdil = 8;
 numerode = 5;
+
+savefolder = "C:\\SAVE\\PATH\\HERE\\"
+
+//////////////////////////////////
 
 setForegroundColor(255, 255, 255);
 
@@ -63,7 +69,7 @@ setAutoThreshold("Huang dark");
 run("Create Mask");
 
 filename = substring(imnameor,0,9)+"_neuritesbinary"+".tif";
-saveAs("Tiff", "E:\\PhD\\data_analysis\\Temp\\"+filename);
+saveAs("Tiff", savefolder+filename);
 run("Close");
 run("Close");
 run("Close");
