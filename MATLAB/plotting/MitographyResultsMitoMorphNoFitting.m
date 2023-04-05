@@ -113,7 +113,7 @@ for fileNum=fileNumbers
             if ARtemp > 1
                 ARtemp = 1/ARtemp;
             end
-            mitoWidth = [mitoWidth; mitoWidthFiles(i,2,fileNum)];
+            mitoWidth = [mitoWidth; mitoWidthEllFiles(i,2,fileNum)];
             mitoArea = [mitoArea; mitoAreaFiles(i,2,fileNum)];
             mitoLength = [mitoLength; mitoLengthFiles(i,2,fileNum)];
             mitoAR = [mitoAR; ARtemp];
