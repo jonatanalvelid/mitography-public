@@ -101,7 +101,7 @@ for fileNum=fileNumbers
     for i=1:mitosPerFile
         % only take mitochondria not in soma, not at border, and not in bkg
         allcheck = somaParamFiles(i,2,fileNum) | borderParamFiles(i,2,fileNum) | bkgParamFiles(i,2,fileNum);
-        if ~allcheck
+        if mitoAreaFiles(i,2,fileNum) ~= 0 && ~allcheck
             % Calculate AR as w_ell/l_ell if the area is small enough
             % (A<0.2 ?m^2), while instead use w_fit/l_ell if the
             % mitochondria is bigger. The fitted width will always be the
