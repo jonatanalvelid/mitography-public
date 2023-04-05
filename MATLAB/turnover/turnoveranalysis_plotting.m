@@ -18,7 +18,7 @@ datafolder = fullfile(doubleparentfolder{1},'example-data');
 %%%
 % Parameters
 % Use example data (True) or local data (False)
-example_data = false;
+example_data = true;
 % Data folder
 if example_data
     masterFolderPath = fullfile(datafolder,'turnover','div7-24h-rats-omp25\matlab\');
@@ -27,7 +27,7 @@ else
 end
 %%%
 
-fileList = dir(fullfile(masterFolderPath,'*_580.tif'));
+fileList = dir(fullfile(masterFolderPath,'*_label1.tif'));
 for i = 1:length(fileList)
     filenumbers(i) = str2num(fileList(i).name(1:3));
 end
@@ -113,7 +113,7 @@ ydata(isnan(ydata))=[];
 
 %%% mean ratios for different distances
 maxdist = ceil(max(somadist)/10)*10;
-groupingdist = 30;
+groupingdist = 30;  % in um
 means = [];
 stds = [];
 bin_n = [];
@@ -155,7 +155,7 @@ ylimup2 = 1;
 fontsize = 14;
 opacity = 0.5;
 
-ylabeltext1 = 'Ratio, 580/sum (a.u.)';
+ylabeltext1 = 'Ratio, label2/sum (a.u.)';
 xlabeltext1 = 'Distance to soma (um)';
 
 ratiopermitofiglin = figure('rend','painters','pos',[100 100 800 400]);
@@ -181,3 +181,5 @@ set(gca,'TickDir','out');
 xticks([xlimlow1:(xlimup1-xlimlow1)/12:xlimup1])
 xticklabels({xlimlow1,'','',(xlimup1-xlimlow1)/4,'','',(xlimup1-xlimlow1)/2,'','',3*(xlimup1-xlimlow1)/4,'','',xlimup1})
 yticks([0 0.25 0.5 0.75 1])
+
+clearvars -except xdata ydata
