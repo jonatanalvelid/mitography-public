@@ -26,7 +26,6 @@ else
     masterFolderPath = strcat(uigetdir('X:\LOCAL\PATH\HERE'),'\');
 end
 %
-areathresh_wEll = 0.1;
 mitosPerFile = 1000;
 lastFileNumber = 12;
 %%%
