@@ -31,30 +31,25 @@ mitosPerFile = 1000;
 %%%
 
 lastFileNumber = input('What is the number of the last image? ');
-
-filenameallPxs = '_PixelSizes.txt';
-filenameallMito = '_MitoAnalysis.txt';
 fileNumbers = 1:lastFileNumber;
 
 %% 
 %%% COMBINE THE MITO FILES, AND GET BINARY PARAMETERS
 
+filenameallPxs = '_PixelSizes.txt';
 filenameAnalysis = '_MitoAnalysis.txt';
 filenameAnalysisSave = '_MitoAnalysisFull.txt';
+filenameMito = '_OnlyMitoImage.tif';
 filenameMitoBinary = '_MitoBinary.tif';
 filenameSomaBinary = '-SomaBinary.tif';
 filenameBkgBinary = '-BkgBinary.tif';
 filenameAISBinary = '-AISBinary.tif';
 filenameGenericBinary = '-GenericBinary.tif';
-filenameMito = '_OnlyMitoImage.tif';
 
 for fileNum = fileNumbers
     
     filepathAnaSave = strFilepath(fileNum,filenameAnalysisSave,masterFolderPath);
     filepathAna = strFilepath(fileNum,filenameAnalysis,masterFolderPath);
-    filepathWid = strFilepath(fileNum,filenameWidths,masterFolderPath);
-    filepathUpperWid = strFilepath(fileNum,filenameUpperWidths,masterFolderPath);
-    filepathBottomWid = strFilepath(fileNum,filenameBottomWidths,masterFolderPath);
     filepathpxs = strFilepath(fileNum,filenameallPxs,masterFolderPath);
     filepathMito = strFilepath(fileNum,filenameMito,masterFolderPath);
     filepathMitoBinary = strFilepath(fileNum,filenameMitoBinary,masterFolderPath);
@@ -62,9 +57,6 @@ for fileNum = fileNumbers
     filepathBkgBinary = strFilepath(fileNum,filenameBkgBinary,masterFolderPath);
     filepathAISBinary = strFilepath(fileNum,filenameAISBinary,masterFolderPath);
     filepathGenericBinary = strFilepath(fileNum,filenameGenericBinary,masterFolderPath);
-    filepathAllFitsWid = strFilepath(fileNum,filenameAllFitsWidths,masterFolderPath);
-    filepathAllFitsUpperWid = strFilepath(fileNum,filenameAllFitsUpperWidths,masterFolderPath);
-    filepathAllFitsBottomWid = strFilepath(fileNum,filenameAllFitsBottomWidths,masterFolderPath);
  
     try
         try
