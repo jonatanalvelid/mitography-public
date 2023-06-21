@@ -26,9 +26,11 @@ process - scripts to process images; distance transform and deconvolve images in
 functions - various utility functions used in the other scripts.
 simulations - scripts for simulating confocal/STED imaging comparison of mitochondria, MPS ring XZ imaging comparison in different imaging modes (conf, 2DSTED, 3DSTED), and calculation of random mito-actin patch distance population from a neuritesbinary map. 
 
+add here the info about the generic binary map, for example if you want to select only dendrites, or AIS or axons
 
 ImageJ
 ------------
+Mitography-MitoandActin-use it only when you are interested in actin specifically
 Mitography - main analysis scripts for mitography, analysing either only mitochondria images or mitochondria and actin images, with pre-calculated binary masks. Outputs a CSV file with information per detected mitochondria as well as line profiles across mitochondria/and actin, for further processing in MATLAB.
 MitochondriaBinarization - scripts for binarizing mitochondria images with labeling of mitochondrial membranes (Tom20, OMP25, etc.).
 NeuritesBinarization - script for calculating a binary neurite map from background of mitochondria images or map2 images.
