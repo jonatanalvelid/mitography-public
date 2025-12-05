@@ -6,6 +6,7 @@ Please see info.txt for information about the various scripts.
 
 Do not hesitate to contact me (@jonatanalvelid) for any questions regarding the code, for your own implementations, or curiosity.
 
+
 Used in the following publications:
 
-Coceano et al. 2024 *in preparation*
+Giovanna Coceano, Jonatan Alvelid, Martina Damenti, Gabriella Ferretti, Johannes Mueller, Joanna Rorbach, Ilaria Testa, "Quantitative optical nanoscopy of mitochondrial-derived vesicles in neurons classify pre-peroxisomal and clearing organelles", 2025, _in revision_
